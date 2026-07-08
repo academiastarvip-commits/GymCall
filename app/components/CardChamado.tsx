@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { Timestamp } from "firebase/firestore";
 
 type Chamado = {
@@ -21,18 +22,19 @@ export default function CardChamado({
   onAtender,
   onFinalizar,
 }: Props) {
-  function tempo() {
+  const tempo = useMemo(() => {
     if (!chamado.criadoEm) return "Agora";
 
-    const minutos = Math.floor(
-      (Date.now() - chamado.criadoEm.toDate().getTime()) / 60000
-    );
+    const criadoEm = chamado.criadoEm.toDate().getTime();
+    const agora = new Date().getTime();
+
+    const minutos = Math.floor((agora - criadoEm) / 60000);
 
     if (minutos <= 0) return "Agora";
     if (minutos === 1) return "1 minuto";
 
     return `${minutos} minutos`;
-  }
+  }, [chamado.criadoEm]);
 
   const cor =
     chamado.status === "aguardando"
@@ -76,7 +78,7 @@ export default function CardChamado({
           marginTop: "6px",
         }}
       >
-        ⏱ {tempo()}
+        ⏱ {tempo}
       </p>
 
       <div

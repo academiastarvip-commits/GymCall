@@ -6,6 +6,7 @@ import {
   onSnapshot,
   orderBy,
   query,
+  Timestamp,
 } from "firebase/firestore";
 
 import { db } from "../lib/firebase";
@@ -22,7 +23,7 @@ type Chamado = {
   numero: number;
   nome: string;
   status: string;
-  criadoEm: any;
+  criadoEm?: Timestamp;
 };
 
 export default function Professor() {
@@ -124,7 +125,9 @@ export default function Professor() {
         aguardando={aguardando}
         atendendo={atendendo}
         finalizados={finalizados}
-      />      {chamados.length === 0 ? (
+      />
+
+      {chamados.length === 0 ? (
         <div
           style={{
             textAlign: "center",
