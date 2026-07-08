@@ -5,124 +5,161 @@ import { useRouter } from "next/navigation";
 
 export default function Aluno() {
   const router = useRouter();
+
   const [numero, setNumero] = useState("");
 
+  function adicionarNumero(valor: string) {
+    if (numero.length >= 3) return;
+
+    setNumero((n) => n + valor);
+  }
+
+  function apagar() {
+    setNumero((n) => n.slice(0, -1));
+  }
+
   function continuar() {
-    const n = Number(numero);
+    if (!numero) return;
 
-    if (!n || n <= 0) {
-      alert("Digite um número válido.");
-      return;
-    }
+    router.push(`/confirmacao?numero=${numero}`);
+  }
 
-    router.push(`/confirmacao?numero=${n}`);
+  function Botao({
+    texto,
+    onClick,
+    cor = "#1e293b",
+  }: {
+    texto: string;
+    onClick: () => void;
+    cor?: string;
+  }) {
+    return (
+      <button
+        onClick={onClick}
+        style={{
+          height: "75px",
+          borderRadius: "18px",
+          border: "none",
+          background: cor,
+          color: "white",
+          fontSize: "28px",
+          fontWeight: "bold",
+          cursor: "pointer",
+        }}
+      >
+        {texto}
+      </button>
+    );
   }
 
   return (
     <main
       style={{
         minHeight: "100vh",
-        backgroundImage: "url('/academia.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        background: "#0f172a",
+        color: "white",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        padding: "20px",
         fontFamily: "Arial",
       }}
     >
       <div
         style={{
-          width: "90%",
+          width: "100%",
           maxWidth: "420px",
-          background: "rgba(0,0,0,.85)",
-          borderRadius: "20px",
-          padding: "40px",
-          color: "white",
-          textAlign: "center",
-          backdropFilter: "blur(8px)",
         }}
       >
-        <img
-          src="/logo.png"
-          alt="GymCall"
-          style={{
-            width: "90px",
-            marginBottom: "20px",
-          }}
-        />
-
         <h1
           style={{
-            color: "#d32f2f",
+            textAlign: "center",
+            fontSize: "42px",
             marginBottom: "10px",
           }}
         >
-          Informe o aparelho
+          GymCall
         </h1>
 
         <p
           style={{
-            color: "#bbb",
+            textAlign: "center",
+            color: "#94a3b8",
             marginBottom: "30px",
-            lineHeight: "24px",
+            fontSize: "18px",
           }}
         >
-          Digite o número do aparelho onde você está treinando.
+          Digite o número do aparelho
         </p>
 
-        <input
-          type="number"
-          placeholder="Número do aparelho"
-          value={numero}
-          onChange={(e) => setNumero(e.target.value)}
+        <div
           style={{
-            width: "100%",
-            padding: "18px",
-            fontSize: "30px",
-            textAlign: "center",
-            borderRadius: "12px",
-            border: "2px solid #333",
-            background: "#222",
-            color: "white",
+            background: "#1e293b",
+            borderRadius: "18px",
+            height: "90px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "48px",
+            fontWeight: "bold",
             marginBottom: "25px",
-            boxSizing: "border-box",
+            border: "2px solid #334155",
           }}
-        />
+        >
+          {numero || "_"}
+        </div>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3,1fr)",
+            gap: "12px",
+          }}
+        >
+          <Botao texto="7" onClick={() => adicionarNumero("7")} />
+          <Botao texto="8" onClick={() => adicionarNumero("8")} />
+          <Botao texto="9" onClick={() => adicionarNumero("9")} />
+
+          <Botao texto="4" onClick={() => adicionarNumero("4")} />
+          <Botao texto="5" onClick={() => adicionarNumero("5")} />
+          <Botao texto="6" onClick={() => adicionarNumero("6")} />
+
+          <Botao texto="1" onClick={() => adicionarNumero("1")} />
+          <Botao texto="2" onClick={() => adicionarNumero("2")} />
+          <Botao texto="3" onClick={() => adicionarNumero("3")} />          <Botao texto="⌫" onClick={apagar} cor="#991b1b" />
+          <Botao texto="0" onClick={() => adicionarNumero("0")} />
+          <Botao texto="✔" onClick={continuar} cor="#16a34a" />
+        </div>
 
         <button
           onClick={continuar}
+          disabled={!numero}
           style={{
             width: "100%",
-            padding: "18px",
-            background: "#d32f2f",
-            color: "white",
+            marginTop: "25px",
+            height: "65px",
             border: "none",
-            borderRadius: "12px",
-            fontSize: "20px",
+            borderRadius: "18px",
+            background: numero ? "#dc2626" : "#475569",
+            color: "white",
+            fontSize: "22px",
             fontWeight: "bold",
-            cursor: "pointer",
+            cursor: numero ? "pointer" : "not-allowed",
           }}
         >
-          CONTINUAR →
+          CONTINUAR
         </button>
 
-        <button
-          onClick={() => router.push("/")}
+        <p
           style={{
-            width: "100%",
-            padding: "16px",
-            marginTop: "15px",
-            background: "transparent",
-            border: "2px solid #666",
-            color: "white",
-            borderRadius: "12px",
-            fontSize: "18px",
-            cursor: "pointer",
+            textAlign: "center",
+            color: "#64748b",
+            marginTop: "25px",
+            fontSize: "14px",
           }}
         >
-          ← Voltar
-        </button>
+          GymCall • Star Vip
+        </p>
       </div>
     </main>
   );

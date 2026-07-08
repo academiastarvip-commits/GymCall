@@ -9,42 +9,37 @@ export default function Home() {
     <main
       style={{
         minHeight: "100vh",
-        backgroundImage: "url('/academia.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        background: "linear-gradient(180deg,#111111 0%,#1a1a1a 100%)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        fontFamily: "Arial",
+        padding: "25px",
+        fontFamily: "Arial, sans-serif",
       }}
     >
       <div
         style={{
-          width: "90%",
+          width: "100%",
           maxWidth: "430px",
-          background: "rgba(0,0,0,.82)",
-          borderRadius: "22px",
-          padding: "40px",
           textAlign: "center",
-          color: "white",
-          backdropFilter: "blur(8px)",
-          boxShadow: "0 15px 40px rgba(0,0,0,.4)",
         }}
       >
         <img
-          src="/logo.png"
-          alt="GymCall"
+          src="/logo-starvip.png"
+          alt="Star Vip"
           style={{
-            width: "120px",
-            marginBottom: "20px",
+            width: "260px",
+            marginBottom: "40px",
           }}
         />
 
         <h1
           style={{
-            color: "#d32f2f",
-            fontSize: "42px",
-            marginBottom: "10px",
+            color: "#FFFFFF",
+            fontSize: "52px",
+            margin: 0,
+            fontWeight: "bold",
+            letterSpacing: "1px",
           }}
         >
           GymCall
@@ -52,58 +47,63 @@ export default function Home() {
 
         <p
           style={{
-            color: "#ddd",
+            color: "#CFCFCF",
+            fontSize: "18px",
+            marginTop: "15px",
+            marginBottom: "45px",
             lineHeight: "28px",
-            marginBottom: "35px",
           }}
         >
-          Chame um professor rapidamente durante o seu treino.
+          Chame um professor em poucos segundos durante o seu treino.
         </p>
 
         <button
           onClick={() => router.push("/aluno")}
           style={{
             width: "100%",
-            padding: "18px",
+            height: "65px",
+            background: "#C8102E",
+            color: "#FFF",
             border: "none",
-            borderRadius: "12px",
-            background: "#d32f2f",
-            color: "white",
-            fontSize: "20px",
+            borderRadius: "18px",
+            fontSize: "22px",
             fontWeight: "bold",
             cursor: "pointer",
-            marginBottom: "15px",
+            marginBottom: "18px",
+            transition: ".2s",
           }}
         >
-          👨‍🎓 SOU ALUNO
+          SOU ALUNO
         </button>
 
         <button
           onClick={() => router.push("/professor")}
           style={{
             width: "100%",
-            padding: "18px",
-            borderRadius: "12px",
-            border: "2px solid #666",
+            height: "65px",
             background: "transparent",
-            color: "white",
-            fontSize: "20px",
+            color: "#FFFFFF",
+            border: "2px solid #C8102E",
+            borderRadius: "18px",
+            fontSize: "22px",
             fontWeight: "bold",
             cursor: "pointer",
           }}
         >
-          👨‍🏫 SOU PROFESSOR
+          SOU PROFESSOR
         </button>
 
-        <p
+        <div
           style={{
-            marginTop: "30px",
-            color: "#888",
-            fontSize: "13px",
+            marginTop: "45px",
+            color: "#777",
+            fontSize: "14px",
           }}
         >
-          GymCall • Sistema de Chamados
-        </p>
+          Star Vip Academia
+          <br />
+          GymCall • Versão 1.0
+        </div>
       </div>
     </main>
   );
